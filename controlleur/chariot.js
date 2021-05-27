@@ -42,7 +42,7 @@ export const getEnvChariot = async (req, res) => {
 export const getEnvC = async (req, res) => {
   const { snC } = req.params;
   try {
-    const EnvChariot = await Chariot.findOne({ snC: snC });
+    const EnvChariot = await Chariot.find({ snC: snC });
     res.status(200).json(EnvChariot);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -52,8 +52,8 @@ export const getEnvC = async (req, res) => {
 export const updateChar = async (req, res) => {
   const { snC } = req.params;
   const { statuChar, datedechargementChar } = req.body;
-
-  if (!(await Chariot.findOne({ snC: snC })))
+const chariot = await Chariot.findOne({ snC: snC, statuChar: 'Chariot Envoyée' })
+  if (!chariot)
     return res.status(404).send(`No Chariot with snC: ${snC}`);
 
   const updatedchar = {
@@ -61,7 +61,7 @@ export const updateChar = async (req, res) => {
     datedechargementChar,
   };
 
-  await Chariot.findOneAndUpdate({ snC: snC }, updatedchar, { new: true });
+  await Chariot.findByIdAndUpdate(chariot._id, updatedchar, { new: true });
 
   res.json(updatedchar);
 };
