@@ -51,14 +51,14 @@ export const getEnvC = async (req, res) => {
 
 export const updateChar = async (req, res) => {
   const { snC } = req.params;
-  const { statuChar, datechargementChar } = req.body;
+  const { statuChar, datedechargementChar } = req.body;
 
   if (!(await Chariot.findOne({ snC: snC })))
     return res.status(404).send(`No Chariot with snC: ${snC}`);
 
   const updatedchar = {
     statuChar,
-    datechargementChar,
+    datedechargementChar,
   };
 
   await Chariot.findOneAndUpdate({ snC: snC }, updatedchar, { new: true });
