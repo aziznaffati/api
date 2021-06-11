@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import express from "express";
 
 import Historique from "../models/historique.js";
+import Ligne from "../models/ligne.js";
 
 const router = express.Router();
 
@@ -33,6 +34,18 @@ export const getHisto = async (req, res) => {
   try {
     const historique = await Historique.findOne({ mat_user:mat,snPDA: sn });
     res.status(200).json(historique);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+
+export const getHistoriqueWithMat = async (req, res) => {
+  const { mat } = req.params;
+  try {
+    const historique = await Historique.findOne({ mat_user:mat });
+    const ligne = await Ligne.findOne({snPDA: historique.snPDA})
+    res.status(200).json(historique, ligne);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
