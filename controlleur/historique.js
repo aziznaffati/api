@@ -45,7 +45,8 @@ export const getHistoriqueWithMat = async (req, res) => {
   try {
     const historique = await Historique.findOne({ mat_user:mat });
     const ligne = await Ligne.findOne({snPDA: historique.snPDA})
-    res.status(200).json({historique, ligne});
+    
+    res.status(200).json({historique, ligne });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

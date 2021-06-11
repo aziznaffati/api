@@ -24,8 +24,8 @@ export const createChariot = async (req, res) => {
 
 export const getChariot = async (req, res) => {
   try {
-    const Chariot = await Chariot.find();
-    res.status(200).json(Chariot);
+    const chariot = await Chariot.find();
+    res.status(200).json(chariot);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
