@@ -109,7 +109,7 @@ router.post('/login', async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.status(200).send({ message: 'succcess', token: token, roleUser: user.roleUser });
+        res.status(200).send({ message: 'succcess', token: token, userData: user });
 
     } catch (error) {
         res.status.send({ message: `${error}` });
