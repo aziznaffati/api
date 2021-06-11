@@ -7,12 +7,12 @@ import User from "../models/user.js";
 const router = express.Router();
 
 export const createUser = async (req, res) => {
-  const { email, matriculeUser, passUser, roleUser } = req.body;
+  const { email, matriculeUser, passUser, roleUser,mat_chef } = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(passUser, salt);
 
-  const newUser = new User({ email, matriculeUser, hashedPassword, roleUser });
+  const newUser = new User({ email, matriculeUser, passUser: hashedPassword, roleUser,mat_chef });
 
   try {
     await newUser.save();
@@ -43,7 +43,7 @@ export const getUs = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { mat } = req.params;
-  const { email, passUser, roleUser } = req.body;
+  const { email, passUser, roleUser,mat_chef } = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(passUser, salt);
@@ -55,6 +55,7 @@ export const updateUser = async (req, res) => {
     email,
     passUser: hashedPassword,
     roleUser,
+    mat_chef,
   };
 
   await User.findOneAndUpdate({ matriculeUser: mat }, updatedUser, {

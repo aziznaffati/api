@@ -10,9 +10,9 @@ const router = express.Router();
 
 export const createContenaire = async (req, res) => {
 
-    const { snC, nserie_produit,date_ajout } = req.body;
+    const { snC, nserie_produit,qtechar,date,heure } = req.body;
 
-    const newContenaire = new Contenaire({ snC, nserie_produit,date_ajout })
+    const newContenaire = new Contenaire({ snC, nserie_produit,qtechar,date,heure })
 
     try {
         await newContenaire.save();
@@ -47,13 +47,9 @@ export const getCont = async (req, res) => {
 
 }
 
-
-
-
-
 export const updateContenaire = async (req, res) => {
     const { snc } = req.params;
-    const {  nserie_produit,date_mise } = req.body;
+    const {  qtechar,date,heure } = req.body;
 
     if (!(await Contenaire.findOne({ snC: snc})))
     return res.status(404).send(`No Contenaire with snC: ${snC}`);
@@ -61,8 +57,7 @@ export const updateContenaire = async (req, res) => {
 
     const updatedContenaire = { 
         
-         nserie_produit,
-         date_mise
+         qtechar,date,heure
          };
 
     await Contenaire.findOneAndUpdate({snC: snc}, updatedContenaire, { new: true });

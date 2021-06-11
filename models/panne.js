@@ -7,7 +7,7 @@ export const panneSchema = new mongoose.Schema({
         ref: 'user',
         required: true,
     },
-    type_panne: {
+    sujet_panne: {
         type: String,
      required: true,
     },

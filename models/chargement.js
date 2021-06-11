@@ -1,31 +1,27 @@
 import mongoose from 'mongoose'
 
-export const contenaireSchema = new mongoose.Schema({
+export const chargementSchema = new mongoose.Schema({
 
     snC: {
         type: String,
         ref: 'chariot',
         required: true,
     },
-    nserie_produit: {
+    snPDA: {
         type: String,
-        ref: 'produit',
+        ref: 'ligne',
         required: true,
     },
-    qtechar: {
-        type: Number,
-     required: true,
-    },
-    date: {
+    datechargementChar: {
         type: Date,
         //required: true,
-        
-    },
-    heure: {
+      },
+      heure_ch: {
         type: String,
         //required: true,
         
     }
+
 })
 
-export default mongoose.model('Contenaire', contenaireSchema);
+export default mongoose.model('Chargement', chargementSchema);

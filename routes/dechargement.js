@@ -1,0 +1,14 @@
+import express from 'express';
+
+import { getDechargement, getDech, createDechargement, updateDechargement, deleteDechargement } from '../controlleur/dechargement.js'
+
+const router = express.Router();
+
+router.post('/', createDechargement);
+router.get('/', getDechargement);
+router.get('/:sn', getDech);
+router.patch('/:sn', updateDechargement);
+router.delete('/:id', deleteDechargement);
+
+
+export default router;

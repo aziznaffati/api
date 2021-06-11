@@ -8,7 +8,7 @@ const router = express.Router();
 export const createPanne = async (req, res) => {
   const { mat_user, type_panne, etat,datePanne } = req.body;
 
-  const newPanne = new Panne({ mat_user, type_panne,etat, datePanne });
+  const newPanne = new Panne({ mat_user, sujet_panne,etat, datePanne });
 
   try {
     await newPanne.save();

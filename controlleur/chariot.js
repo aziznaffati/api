@@ -5,60 +5,52 @@ import Chariot from "../models/chariot.js";
 
 const router = express.Router();
 
-export const createEnvChariot = async (req, res) => {
-  const { snC, statuChar, datechargementChar, qteProdChar, nserie_produit } =
+export const createChariot = async (req, res) => {
+  const { snC, statuChar } =
     req.body;
-  if (qteProdChar == 0) {
-    return res.status(409).send({
-      message: "Invalid quentité",
-    });
-  }
-  req.datechargementChar = Date.now;
-  const newEnvChariot = new Chariot({
+  const newChariot = new Chariot({
     snC,
     statuChar,
-    datechargementChar,
-    qteProdChar,
-    nserie_produit,
+    
   });
 
   try {
-    await newEnvChariot.save();
-    res.status(200).json(newEnvChariot);
+    await newChariot.save();
+    res.status(200).json(newChariot);
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
 };
 
-export const getEnvChariot = async (req, res) => {
+export const getChariot = async (req, res) => {
   try {
-    const EnvChariot = await Chariot.find();
-    res.status(200).json(EnvChariot);
+    const Chariot = await Chariot.find();
+    res.status(200).json(Chariot);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
-export const getEnvC = async (req, res) => {
+export const getC = async (req, res) => {
   const { snC } = req.params;
   try {
-    const EnvChariot = await Chariot.find({ snC: snC });
-    res.status(200).json(EnvChariot);
+    const Chariot = await Chariot.find({ snC: snC });
+    res.status(200).json(Chariot);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
+
 
 export const updateChar = async (req, res) => {
   const { snC } = req.params;
-  const { statuChar, datedechargementChar } = req.body;
-const chariot = await Chariot.findOne({ snC: snC, statuChar: 'Chariot Envoyée' })
+  const { statuChar, } = req.body;
+const chariot = await Chariot.findOne({ snC: snC })
   if (!chariot)
     return res.status(404).send(`No Chariot with snC: ${snC}`);
 
   const updatedchar = {
     statuChar,
-    datedechargementChar,
   };
 
   await Chariot.findByIdAndUpdate(chariot._id, updatedchar, { new: true });

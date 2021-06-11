@@ -6,19 +6,19 @@ import Produit from "../models/produit.js";
 const router = express.Router();
 
 export const createProduit = async (req, res) => {
-  const { nserieProduit, typeembalage, maxembalage, dateajout, datemise } =
+  const { nserieProduit,qtestock, maxembalageC, maxembalageSH,  } =
     req.body;
-  if (maxembalage == 0) {
+  if (qtestock == 0) {
     return res.status(409).send({
       message: "Invalid quentité",
     });
   }
   const newProduit = new Produit({
     nserieProduit,
-    typeembalage,
-    maxembalage,
-    dateajout,
-    datemise,
+    qtestock,
+    maxembalageC,
+    maxembalageSH,
+    
   });
 
   try {
@@ -68,6 +68,26 @@ export const updateProduit = async (req, res) => {
 
   res.json(updatedProduit);
 };
+
+export const updateQteProduit = async (req, res) => {
+  const { sn } = req.params;
+  const { qteProd } = req.body;
+  const produit = await Produit.findOne({ nserieProduit: sn })
+  
+  if (!produit)
+    return res.status(404).send(`No Produit with nserieProduit: ${nserieProduit}`);
+
+const newQteProd = produit.qtestock - qteProd
+
+
+  await Produit.findOneAndUpdate({ nserieProduit: sn }, {qtestock: newQteProd}, {
+    new: true,
+  });
+
+  res.json({newQteProd});
+};
+
+
 
 export const deleteProduit = async (req, res) => {
   produit.count({ _id: `${req.params.id}` }, async (err, count) => {

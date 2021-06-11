@@ -6,20 +6,18 @@ export const produitSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    typeembalage: {
+    qtestock: {
+        type: Number,
+     required: true,
+    },
+    
+    maxembalageC: {
         type: String,
      required: true,
     },
-    maxembalage: {
+    maxembalageSH: {
         type: String,
      required: true,
-    },
-    dateajout: {
-        type: Date,
-     
-    },
-    datemise: {
-        type: Date,
     },
     
 

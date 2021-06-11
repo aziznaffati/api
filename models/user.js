@@ -17,6 +17,11 @@ export const userSchema = new mongoose.Schema({
         type: String,
      required: true,
     },
+    mat_chef: {
+        type: String,
+        ref: 'user',
+        //required: true,
+    },
 
 
 

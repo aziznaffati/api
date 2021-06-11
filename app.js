@@ -13,6 +13,9 @@ import ligneRoutes from './routes/ligne.js'
 import produitRoutes from './routes/produit.js'
 import usersRoutes from './routes/user.js'
 import contenaireRoutes from './routes/contenaire.js'
+import historiqueRoutes from './routes/historique.js'
+import dechargementRoutes from './routes/dechargement.js'
+import chargementRoutes from './routes/chargement.js'
 
 
 dotenv.config();
@@ -35,6 +38,9 @@ app.use("/ligne", ligneRoutes);
 app.use("/produit", produitRoutes);
 app.use("/users", usersRoutes);
 app.use("/contenaire", contenaireRoutes);
+app.use("/historique", historiqueRoutes);
+app.use("/dechargement", dechargementRoutes);
+app.use("/chargement", chargementRoutes);
 
 
 

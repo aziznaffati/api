@@ -6,9 +6,9 @@ import Ligne from "../models/ligne.js";
 const router = express.Router();
 
 export const createLigne = async (req, res) => {
-  const { snPDA, designationPDA, dateaffecPDA, mat_user } = req.body;
+  const { snPDA, designationPDA  } = req.body;
 
-  const newLigne = new Ligne({ snPDA, designationPDA, dateaffecPDA, mat_user });
+  const newLigne = new Ligne({ snPDA, designationPDA  });
 
   try {
     await newLigne.save();
@@ -39,15 +39,15 @@ export const getLine = async (req, res) => {
 
 export const updateLigne = async (req, res) => {
   const { sn } = req.params;
-  const { designationPDA, dateaffecPDA, mat_user } = req.body;
+  const { designationPDA } = req.body;
 
   if (!(await Ligne.findOne({ snPDA: sn })))
     return res.status(404).send(`No Ligne with snPDA: ${snPDA}`);
 
   const updatedLigne = {
     designationPDA,
-    dateaffecPDA,
-    mat_user,
+    
+   
   };
 
   await Ligne.findOneAndUpdate({ snPDA: sn }, updatedLigne, { new: true });
