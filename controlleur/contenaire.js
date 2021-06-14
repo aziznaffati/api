@@ -18,7 +18,7 @@ export const createContenaire = async (req, res) => {
   if (!checkNP)
     return res.status(404).json({ message: "Produit n'existe pas!!" });
 
-    if(qtechar > checkNP.maxembalageC || qtechar > checkNP.maxembalageSH || qtechar >  checkNP.qtestock )
+    if(qtechar > checkNP.maxembalageC && qtechar > checkNP.maxembalageSH && qtechar >  checkNP.qtestock )
      return res.status(409).json({ message: "Qte insuffisant!!" });
 
   const newContenaire = new Contenaire({
