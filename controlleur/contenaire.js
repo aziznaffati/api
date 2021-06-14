@@ -81,7 +81,7 @@ export const deleteContenaire = async (req, res) => {
 
     try {
         
-        await Contenaire.findOneAndDelete({snC, nserieProduit});
+        await Contenaire.findOneAndDelete({snC, nserie_produit:nserieProduit});
        return  res.status(200).json({ message: "Contenaire deleted successfully." });
       
     } catch (error) {
