@@ -4,6 +4,7 @@ import express from "express";
 import Contenaire from "../models/contenaire.js";
 import Chariot from "../models/chariot.js";
 import Produit from "../models/produit.js";
+import contenaire from "../models/contenaire.js";
 
 const router = express.Router();
 
@@ -80,8 +81,11 @@ export const deleteContenaire = async (req, res) => {
     const {snC, nserieProduit} = req.params
 
     try {
+        const containaire = await Contenaire.findOne({snC, nserieProduit:nserieProduit})
         
-        await Contenaire.findOneAndDelete({snC, nserie_produit:nserieProduit});
+        if(!containaire)  return  res.status(200).json({ message: "Contenaire Not Found" });
+
+        await Contenaire.findByIdAndRemove(containaire._id);
        return  res.status(200).json({ message: "Contenaire deleted successfully." });
       
     } catch (error) {
