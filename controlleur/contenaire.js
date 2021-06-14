@@ -81,7 +81,7 @@ export const deleteContenaire = async (req, res) => {
     const {snC, nserieProduit} = req.params
 
     try {
-        const containaire = await Contenaire.findOne({snC, nserieProduit:nserieProduit})
+        const containaire = await Contenaire.findOne({snC, nserie_produit:nserieProduit})
         
         if(!containaire)  return  res.status(200).json({ message: "Contenaire Not Found" });
 
