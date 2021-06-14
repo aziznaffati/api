@@ -8,7 +8,7 @@ router.post('/', createContenaire);
 router.get('/', getContenaires);
 router.get('/:snC',getCont );
 router.patch('/:snc', updateContenaire);
-router.delete('/:id', deleteContenaire);
+router.delete('/:snC/:nserieProduit', deleteContenaire);
 
 
 export default router;

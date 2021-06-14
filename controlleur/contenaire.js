@@ -77,14 +77,16 @@ export const updateContenaire = async (req, res) => {
 };
 
 export const deleteContenaire = async (req, res) => {
-  Contenaire.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await Contenaire.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "Contenaire deleted successfully." });
-    } else {
-      return res.status(400).send(`Contenaire Not Found `);
+    const {snC, nserieProduit} = req.params
+
+    try {
+        
+        await Contenaire.findOneAndDelete({snC, nserieProduit});
+       return  res.status(200).json({ message: "Contenaire deleted successfully." });
+      
+    } catch (error) {
+        return res.status(400).send(`Contenaire Not Found `);
     }
-  });
 };
 
 export default router;
