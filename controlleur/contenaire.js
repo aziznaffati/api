@@ -14,7 +14,7 @@ export const createContenaire = async (req, res) => {
   if (!checkSNC)
     return res.status(404).json({ message: "chariot n'existe pas!!" });
 
-  const checkNP = await Produit.findOne({ nserie_produit });
+  const checkNP = await Produit.findOne({ nserieProduit: nserie_produit });
   if (!checkNP)
     return res.status(404).json({ message: "Produit n'existe pas!!" });
 
