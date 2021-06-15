@@ -17,7 +17,11 @@ export const createContenaire = async (req, res) => {
   const checkNP = await Produit.findOne({ nserieProduit: nserie_produit });
   if (!checkNP)
     return res.status(404).json({ message: "Produit n'existe pas!!" });
-
+    if (qtechar == 0) {
+      return res.status(409).send({
+        message: "Invalid quentité",
+      });
+    }
     if(qtechar < checkNP.maxembalageC && qtechar < checkNP.maxembalageSH && qtechar <  checkNP.qtestock ){
      
   const newContenaire = new Contenaire({
