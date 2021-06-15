@@ -4,7 +4,6 @@ import express from "express";
 import Contenaire from "../models/contenaire.js";
 import Chariot from "../models/chariot.js";
 import Produit from "../models/produit.js";
-import contenaire from "../models/contenaire.js";
 
 const router = express.Router();
 

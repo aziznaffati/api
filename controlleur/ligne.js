@@ -66,4 +66,22 @@ export const deleteLigne = async (req, res) => {
   });
 };
 
+export const deleteLigne = async (req, res) => {
+  const {snp} = req.params
+
+  try {
+      const ligne = await Ligne.findOne({snPDA:snp})
+      
+      if(!ligne)  return  res.status(200).json({ message: "Ligne Not Found" });
+
+      await Ligne.findByIdAndRemove(ligne._id);
+     return  res.status(200).json({ message: "Ligne deleted successfully." });
+    
+  } catch (error) {
+      return res.status(400).send(`Ligne Not Found `);
+  }
+};
+
+
+
 export default router;

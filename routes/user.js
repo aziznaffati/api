@@ -8,7 +8,7 @@ router.post('/', createUser);
 router.get('/', getUser);
 router.get('/:mat', getUs);
 router.patch('/:mat', updateUser);
-router.delete('/:id', deleteUser);
+router.delete('/:mat', deleteUser);
 
 
 export default router;

@@ -8,7 +8,7 @@ router.post('/', createDechargement);
 router.get('/', getDechargement);
 router.get('/:sn', getDech);
 router.patch('/:sn', updateDechargement);
-router.delete('/:id', deleteDechargement);
+router.delete('/:snC', deleteDechargement);
 
 
 export default router;

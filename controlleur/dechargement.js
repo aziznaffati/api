@@ -2,12 +2,14 @@ import mongoose from "mongoose";
 import express from "express";
 
 import Dechargement from "../models/dechargement.js";
+import Chariot from "../models/chariot.js";
 
 const router = express.Router();
 
 export const createDechargement = async (req, res) => {
   const {snC, snPDA, datedechargementChar,heure_dech  } = req.body;
-
+  const checkSNC = await Chariot.findOne({ snC });
+  if (!checkSNC)
   const newDechargement = new Dechargement({ snC, snPDA, datedechargementChar,heure_dech });
 
   try {
@@ -57,16 +59,20 @@ export const updateDechargement = async (req, res) => {
 };
 
 
-
 export const deleteDechargement = async (req, res) => {
-  dechargement.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await dechargement.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "chariot deleted successfully." });
-    } else {
-      return res.status(400).send(`chariot Not Found `);
-    }
-  });
+  const {snC} = req.params
+
+  try {
+      const dechargement = await Dechargement.findOne({snC})
+      
+      if(!dechargement)  return  res.status(200).json({ message: "Dechargement Not Found" });
+
+      await Dechargement.findByIdAndRemove(dechargement._id);
+     return  res.status(200).json({ message: "Dechargement deleted successfully." });
+    
+  } catch (error) {
+      return res.status(400).send(`Dechargement Not Found `);
+  }
 };
 
 export default router;

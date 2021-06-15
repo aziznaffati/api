@@ -62,4 +62,7 @@ export const deletePanne = async (req, res) => {
   });
 };
 
+
+
+
 export default router;

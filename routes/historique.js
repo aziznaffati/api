@@ -9,7 +9,7 @@ router.get('/', getHistorique);
 router.get('/:mat/:sn', getHisto);
 router.get('/:mat', getHistoriqueWithMat);
 router.patch('/:sn', updateHistorique);
-router.delete('/:id', deleteHistorique);
+router.delete('/:mat', deleteHistorique);
 
 
 export default router;

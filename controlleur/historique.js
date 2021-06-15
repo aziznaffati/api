@@ -80,5 +80,20 @@ export const deleteHistorique = async (req, res) => {
     }
   });
 };
+export const deleteHistorique = async (req, res) => {
+  const {mat} = req.params
+
+  try {
+      const historique = await Historique.findOne({mat_user:mat})
+      
+      if(!historique)  return  res.status(200).json({ message: "Historique Not Found" });
+
+      await Historique.findByIdAndRemove(historique._id);
+     return  res.status(200).json({ message: "Historique deleted successfully." });
+    
+  } catch (error) {
+      return res.status(400).send(`Historique Not Found `);
+  }
+};
 
 export default router;

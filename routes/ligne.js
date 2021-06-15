@@ -8,7 +8,7 @@ router.post('/', createLigne);
 router.get('/', getLigne);
 router.get('/:sn', getLine);
 router.patch('/:sn', updateLigne);
-router.delete('/:id', deleteLigne);
+router.delete('/:snp', deleteLigne);
 
 
 export default router;

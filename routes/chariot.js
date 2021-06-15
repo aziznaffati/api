@@ -8,7 +8,7 @@ router.post('/', createChariot);
 router.get('/', getChariot);
 router.get('/:snC', getC);
 router.patch('/:snC', updateChar);
-router.delete('/:id', deleteChariot);
+router.delete('/:snC', deleteChariot);
 
 
 export default router;

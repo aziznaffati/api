@@ -2,12 +2,16 @@ import mongoose from "mongoose";
 import express from "express";
 
 import Chargement from "../models/chargement.js";
+import Chariot from "../models/chariot.js";
 
 const router = express.Router();
 
 export const createChargement = async (req, res) => {
   const {snC, snPDA, datechargementChar,heure_ch  } = req.body;
 
+  const checkSNC = await Chariot.findOne({ snC });
+  if (!checkSNC)
+    return res.status(404).json({ message: "chariot n'existe pas!!" });
   const newChargement = new Chargement({ snC, snPDA, datechargementChar,heure_ch   });
 
   try {
@@ -58,15 +62,21 @@ export const updateChargement = async (req, res) => {
 
 
 
+
 export const deleteChargement = async (req, res) => {
-  chargement.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await chargement.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "chariot deleted successfully." });
-    } else {
-      return res.status(400).send(`chariot Not Found `);
-    }
-  });
+  const {snC} = req.params
+
+  try {
+      const chargement = await Chargement.findOne({snC})
+      
+      if(!chargement)  return  res.status(200).json({ message: "Chargement Not Found" });
+
+      await Chargement.findByIdAndRemove(chargement._id);
+     return  res.status(200).json({ message: "Chargement deleted successfully." });
+    
+  } catch (error) {
+      return res.status(400).send(`Chargement Not Found `);
+  }
 };
 
 export default router;

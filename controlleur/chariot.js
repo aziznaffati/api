@@ -69,4 +69,21 @@ export const deleteChariot = async (req, res) => {
   });
 };
 
+export const deleteChariot = async (req, res) => {
+  const {snC} = req.params
+
+  try {
+      const chariot = await Chariot.findOne({snC})
+      
+      if(!chariot)  return  res.status(200).json({ message: "Chariot Not Found" });
+
+      await Chariot.findByIdAndRemove(chariot._id);
+     return  res.status(200).json({ message: "Chariot deleted successfully." });
+    
+  } catch (error) {
+      return res.status(400).send(`Chariot Not Found `);
+  }
+};
+
+
 export default router;

@@ -90,14 +90,20 @@ const newQteProd = produit.qtestock - qteProd
 
 
 export const deleteProduit = async (req, res) => {
-  produit.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await produit.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "Produit deleted successfully." });
-    } else {
+  const {sn} = req.params
+
+  try {
+      const produit = await Produit.findOne({nserieProduit:sn})
+      
+      if(!produit)  return  res.status(200).json({ message: "Produit Not Found" });
+
+      await Produit.findByIdAndRemove(produit._id);
+     return  res.status(200).json({ message: "Produit deleted successfully." });
+    
+  } catch (error) {
       return res.status(400).send(`Produit Not Found `);
-    }
-  });
+  }
 };
+
 
 export default router;

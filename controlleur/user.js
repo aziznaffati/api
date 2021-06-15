@@ -65,15 +65,22 @@ export const updateUser = async (req, res) => {
   res.json(updatedUser);
 };
 
+
+
 export const deleteUser = async (req, res) => {
-  User.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await User.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "User deleted successfully." });
-    } else {
+  const {mat} = req.params
+
+  try {
+      const user = await User.findOne({matriculeUser:mat})
+      
+      if(!user)  return  res.status(200).json({ message: "User Not Found" });
+
+      await User.findByIdAndRemove(user._id);
+     return  res.status(200).json({ message: "User deleted successfully." });
+    
+  } catch (error) {
       return res.status(400).send(`User Not Found `);
-    }
-  });
+  }
 };
 
 export default router;

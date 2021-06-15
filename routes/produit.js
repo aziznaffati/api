@@ -9,7 +9,7 @@ router.get('/', getProduit);
 router.get('/:sn', getProd);
 router.patch('/:sn', updateProduit);
 router.patch('/updateqte/:sn', updateQteProduit);
-router.delete('/:id', deleteProduit);
+router.delete('/:sn', deleteProduit);
 
 
 export default router;
