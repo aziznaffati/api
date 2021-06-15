@@ -51,7 +51,7 @@ export const getProd = async (req, res) => {
 
 export const updateProduit = async (req, res) => {
   const { sn } = req.params;
-  const { typeembalage, maxembalage, datemise } = req.body;
+  const { qtestock, maxembalageC, maxembalageSH } = req.body;
 
   if (!(await Produit.findOne({ nserieProduit: sn })))
     return res.status(404).send(`No Produit with nserieProduit: ${nserieProduit}`);
