@@ -10,6 +10,7 @@ export const createDechargement = async (req, res) => {
   const {snC, snPDA, datedechargementChar,heure_dech  } = req.body;
   const checkSNC = await Chariot.findOne({ snC });
   if (!checkSNC)
+  return res.status(404).json({ message: "chariot n'existe pas!!" });
   const newDechargement = new Dechargement({ snC, snPDA, datedechargementChar,heure_dech });
 
   try {

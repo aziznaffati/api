@@ -55,16 +55,7 @@ export const updateLigne = async (req, res) => {
   res.json(updatedLigne);
 };
 
-export const deleteLigne = async (req, res) => {
-  Ligne.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await Ligne.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "PDA deleted successfully." });
-    } else {
-      return res.status(400).send(`PDA Not Found `);
-    }
-  });
-};
+
 
 export const deleteLigne = async (req, res) => {
   const {snp} = req.params

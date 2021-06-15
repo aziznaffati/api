@@ -58,16 +58,6 @@ const chariot = await Chariot.findOne({ snC: snC })
   res.json(updatedchar);
 };
 
-export const deleteChariot = async (req, res) => {
-  Chariot.count({ _id: `${req.params.id}` }, async (err, count) => {
-    if (count > 0) {
-      await Chariot.findByIdAndRemove(req.params.id);
-      res.status(200).json({ message: "Chariot deleted successfully." });
-    } else {
-      return res.status(400).send(`Chariot Not Found `);
-    }
-  });
-};
 
 export const deleteChariot = async (req, res) => {
   const {snC} = req.params
