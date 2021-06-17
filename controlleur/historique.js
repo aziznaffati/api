@@ -54,13 +54,13 @@ export const getHistoriqueWithMat = async (req, res) => {
 
 export const updateHistorique = async (req, res) => {
   const { sn } = req.params;
-  const { date,heure } = req.body;
+  const { mat_user,date,heure } = req.body;
 
   if (!(await Historique.findOne({ snPDA: sn})))
     return res.status(404).send(`No Ligne with snPDA: ${snPDA}`);
 
   const updatedHistorique = {
-    date,heure
+    mat_user, date,heure
     
    
   };
