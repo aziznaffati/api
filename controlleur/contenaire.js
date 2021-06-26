@@ -22,7 +22,7 @@ export const createContenaire = async (req, res) => {
         message: "Invalid quentité",
       });
     }
-    if(qtechar < checkNP.maxembalageC && qtechar < checkNP.maxembalageSH && qtechar <  checkNP.qtestock ){
+    if(qtechar < checkNP.maxembalageC && qtechar < checkNP.maxembalageSH && qtechar >  checkNP.qtestock ){
      
   const newContenaire = new Contenaire({
     snC,
